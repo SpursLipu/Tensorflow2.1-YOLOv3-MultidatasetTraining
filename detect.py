@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 # coding=utf-8
 
 
@@ -13,6 +12,8 @@ if __name__ == '__main__':
     parser.add_argument('--img_size', type=int, default=416, help='inference size (pixels)')
     parser.add_argument('--weights', type=str, default='./weights/init/yolov3.weights', help='initial weights')
     parser.add_argument('--iou_loss_thresh', type=int, default=0.5, help='iou_loss_thresh')
+    parser.add_argument('--confidence_thresh', type=int, default=0.5, help='confidence_thresh')
+    parser.add_argument('--nms_thresh', type=int, default=0.45, help='nms_thresh')
 
     opt = parser.parse_args()
     print(opt)
@@ -38,8 +39,8 @@ if __name__ == '__main__':
     pred_bbox = model(image_data, training=False)
     pred_bbox = [tf.reshape(x, (-1, tf.shape(x)[-1])) for x in pred_bbox]
     pred_bbox = tf.concat(pred_bbox, axis=0)
-    bboxes = utils.postprocess_boxes(pred_bbox, original_image_size, opt.img_size, 0.3)
-    bboxes = utils.nms(bboxes, 0.45, method='nms')
+    bboxes = utils.postprocess_boxes(pred_bbox, original_image_size, opt.img_size, opt.confidence_thresh)
+    bboxes = utils.nms(bboxes, opt.nms_thresh, method='nms')
 
     image = utils.draw_bbox(original_image, bboxes, opt=opt, )
     image = Image.fromarray(image)
