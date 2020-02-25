@@ -66,5 +66,5 @@ if __name__ == '__main__':
         for image_data, target in trainset:
             train_step(image_data, target)
             global_steps += 1
-    model.save_weights("./weights/yolov3")
-    global_steps = 0
+        global_steps = 0
+        model.save_weights("./weights/yolov3")

@@ -1,15 +1,6 @@
 #! /usr/bin/env python
 # coding=utf-8
-# ================================================================
-#   Copyright (C) 2019 * Ltd. All rights reserved.
-#
-#   Editor      : VIM
-#   File name   : image_demo.py
-#   Author      : YunYang1994
-#   Created date: 2019-07-12 13:07:27
-#   Description :
-#
-# ================================================================
+
 
 import cv2
 import argparse
@@ -36,7 +27,7 @@ if __name__ == '__main__':
     model.load_weights("./weights/yolov3")
     model.summary()
 
-    image_path = "data/input/0000001_02999_d_0000005.jpg"
+    image_path = "data/input/0000001_03499_d_0000006.jpg"
 
     original_image = cv2.imread(image_path)
     original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)

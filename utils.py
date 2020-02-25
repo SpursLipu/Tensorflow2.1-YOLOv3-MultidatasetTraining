@@ -81,8 +81,10 @@ def image_preporcess(image, target_size, gt_boxes=None):
 
     else:
 
-        gt_boxes[:, [1, 3]] = gt_boxes[:, [1, 3]] * w * scale + dw
-        gt_boxes[:, [2, 4]] = gt_boxes[:, [2, 4]] * h * scale + dh
+        gt_boxes[:, [1]] = gt_boxes[:, [1]] * w * scale + dw
+        gt_boxes[:, [3]] = gt_boxes[:, [3]] * w * scale
+        gt_boxes[:, [2]] = gt_boxes[:, [2]] * h * scale + dh
+        gt_boxes[:, [4]] = gt_boxes[:, [4]] * h * scale
         return image_paded, gt_boxes
 
 
