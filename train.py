@@ -41,7 +41,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr_init', type=int, default=1e-4, help='initial lr')
     parser.add_argument('--iou_loss_thresh', type=int, default=0.5, help='iou_loss_thresh')
     parser.add_argument('--conti', type=bool, default=False, help='continue training')
-
+    parser.add_argument('--model', type=str, default='mobilenet', help='initial weights')
     opt = parser.parse_args()
     print(opt)
 
@@ -57,10 +57,16 @@ if __name__ == '__main__':
     model = yolov3(opt)
     input_layer = tf.keras.layers.Input([opt.img_size, opt.img_size, 3])
     output = model(input_layer, training=True)
-    if opt.conti == True:
-        model.load_weights("./weights/yolov3")
-    else:
+    if opt.model == 'darknet' and opt.conti == True:
+        model.load_weights("./weights/darknet/yolov3")
+    elif opt.model == 'darknet' and opt.conti == False:
         utils.load_weights(model, "./weights/init/yolov3.weights")
+    elif opt.model == 'mobilenet' and opt.conti == True:
+        model.load_weights("./weights/mobilenet/yolov3")
+    elif opt.model == 'mobilenet' and opt.conti == False:
+        print("mobilenet train start!")
+    else:
+        print("error！")
     optimizer = tf.keras.optimizers.Adam()
     for epoch in range(opt.epochs):
         for image_data, target in trainset:
