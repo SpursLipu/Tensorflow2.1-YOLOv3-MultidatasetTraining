@@ -73,4 +73,7 @@ if __name__ == '__main__':
             train_step(image_data, target)
             global_steps += 1
         global_steps = 0
-        model.save_weights("./weights/yolov3")
+        if opt.model == 'darknet':
+            model.save_weights("./weights/darket/yolov3")
+        else:
+            model.save_weights("./weights/mobilenet/yolov3")
