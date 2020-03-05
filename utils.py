@@ -98,7 +98,7 @@ def load_weights(model, weights_file):
         conv_layer_name = 'conv2d_%d' % i if i > 0 else 'conv2d'
         bn_layer_name = 'batch_normalization_%d' % j if j > 0 else 'batch_normalization'
         if i <= 51:
-            conv_layer = model.Darknet.get_layer(conv_layer_name)
+            conv_layer = model.backbone.get_layer(conv_layer_name)
         else:
             conv_layer = model.get_layer(conv_layer_name)
         filters = conv_layer.filters
@@ -119,7 +119,7 @@ def load_weights(model, weights_file):
             # tf weights: [gamma, beta, mean, variance]
             bn_weights = bn_weights.reshape((4, filters))[[1, 0, 2, 3]]
             if j <= 51:
-                bn_layer = model.Darknet.get_layer(bn_layer_name)
+                bn_layer = model.backbone.get_layer(bn_layer_name)
             else:
                 bn_layer = model.get_layer(bn_layer_name)
             j += 1

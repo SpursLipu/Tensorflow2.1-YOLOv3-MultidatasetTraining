@@ -15,7 +15,7 @@ class h_swish(Layer):
         self.relu6 = ReLU(max_value=6)
 
     def call(self, x):
-        output = x * (self.relu6(x) / 6.0)
+        output = x * (self.relu6(x + 3.0) / 6.0)
         return output
 
 
@@ -482,246 +482,246 @@ class Mobilenetv3(Model):
         self.c1 = Conv2D(input_shape=(image_size, image_size, 3),
                          filters=16, kernel_size=(3, 3), padding='same', strides=2,
                          kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                         bias_initializer=tf.constant_initializer(0.))
+                         use_bias=False)
         self.bn1 = BatchNormalization()
         self.ac1 = h_swish()
 
         self.bneck1_expand = Conv2D(filters=16, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck1_expand_bn = BatchNormalization()
         self.bneck1_expand_ac = ReLU(max_value=6.0)
         self.bneck1_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=1,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck1_dwise_bn = BatchNormalization()
         self.bneck1_dwise_ac = ReLU(max_value=6.0)
         self.bneck1_shirnk = Conv2D(filters=16, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck1_shirnk_bn = BatchNormalization()
 
         self.bneck2_expand = Conv2D(filters=64, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck2_expand_bn = BatchNormalization()
         self.bneck2_expand_ac = ReLU(max_value=6.0)
         self.bneck2_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=2,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck2_dwise_bn = BatchNormalization()
         self.bneck2_dwise_ac = ReLU(max_value=6.0)
         self.bneck2_shirnk = Conv2D(filters=24, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck2_shirnk_bn = BatchNormalization()
 
         self.bneck3_expand = Conv2D(filters=72, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck3_expand_bn = BatchNormalization()
         self.bneck3_expand_ac = ReLU(max_value=6.0)
         self.bneck3_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=1,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck3_dwise_bn = BatchNormalization()
         self.bneck3_dwise_ac = ReLU(max_value=6.0)
         self.bneck3_shirnk = Conv2D(filters=24, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck3_shirnk_bn = BatchNormalization()
 
         self.bneck4_expand = Conv2D(filters=72, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck4_expand_bn = BatchNormalization()
         self.bneck4_expand_ac = ReLU(max_value=6.0)
         self.bneck4_dwise = DepthwiseConv2D(kernel_size=(5, 5), padding='same', strides=2,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck4_dwise_bn = BatchNormalization()
         self.bneck4_dwise_ac = ReLU(max_value=6.0)
         self.bneck4_SE = SE(72)
         self.bneck4_shirnk = Conv2D(filters=40, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck4_shirnk_bn = BatchNormalization()
 
         self.bneck5_expand = Conv2D(filters=120, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck5_expand_bn = BatchNormalization()
         self.bneck5_expand_ac = ReLU(max_value=6.0)
         self.bneck5_dwise = DepthwiseConv2D(kernel_size=(5, 5), padding='same', strides=1,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck5_dwise_bn = BatchNormalization()
         self.bneck5_dwise_ac = ReLU(max_value=6.0)
         self.bneck5_SE = SE(120)
         self.bneck5_shirnk = Conv2D(filters=40, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck5_shirnk_bn = BatchNormalization()
 
         self.bneck6_expand = Conv2D(filters=120, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck6_expand_bn = BatchNormalization()
         self.bneck6_expand_ac = ReLU(max_value=6.0)
         self.bneck6_dwise = DepthwiseConv2D(kernel_size=(5, 5), padding='same', strides=1,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck6_dwise_bn = BatchNormalization()
         self.bneck6_dwise_ac = ReLU(max_value=6.0)
         self.bneck6_SE = SE(120)
         self.bneck6_shirnk = Conv2D(filters=40, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck6_shirnk_bn = BatchNormalization()
 
         self.bneck7_expand = Conv2D(filters=240, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck7_expand_bn = BatchNormalization()
         self.bneck7_expand_ac = h_swish()
         self.bneck7_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=2,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck7_dwise_bn = BatchNormalization()
         self.bneck7_dwise_ac = h_swish()
         self.bneck7_shirnk = Conv2D(filters=80, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck7_shirnk_bn = BatchNormalization()
 
         self.bneck8_expand = Conv2D(filters=200, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck8_expand_bn = BatchNormalization()
         self.bneck8_expand_ac = h_swish()
         self.bneck8_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=1,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck8_dwise_bn = BatchNormalization()
         self.bneck8_dwise_ac = h_swish()
         self.bneck8_shirnk = Conv2D(filters=80, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck8_shirnk_bn = BatchNormalization()
 
         self.bneck9_expand = Conv2D(filters=184, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck9_expand_bn = BatchNormalization()
         self.bneck9_expand_ac = h_swish()
         self.bneck9_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=1,
                                             depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                            bias_initializer=tf.constant_initializer(0.))
+                                            use_bias=False)
         self.bneck9_dwise_bn = BatchNormalization()
         self.bneck9_dwise_ac = h_swish()
         self.bneck9_shirnk = Conv2D(filters=80, kernel_size=(1, 1), padding='same', strides=1,
                                     kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                    bias_initializer=tf.constant_initializer(0.))
+                                    use_bias=False)
         self.bneck9_shirnk_bn = BatchNormalization()
 
         self.bneck10_expand = Conv2D(filters=184, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck10_expand_bn = BatchNormalization()
         self.bneck10_expand_ac = h_swish()
         self.bneck10_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=1,
                                              depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                             bias_initializer=tf.constant_initializer(0.))
+                                             use_bias=False)
         self.bneck10_dwise_bn = BatchNormalization()
         self.bneck10_dwise_ac = h_swish()
         self.bneck10_shirnk = Conv2D(filters=80, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck10_shirnk_bn = BatchNormalization()
 
         self.bneck11_expand = Conv2D(filters=480, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck11_expand_bn = BatchNormalization()
         self.bneck11_expand_ac = h_swish()
         self.bneck11_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=1,
                                              depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                             bias_initializer=tf.constant_initializer(0.))
+                                             use_bias=False)
         self.bneck11_dwise_bn = BatchNormalization()
         self.bneck11_dwise_ac = h_swish()
         self.bneck11_SE = SE(480)
         self.bneck11_shirnk = Conv2D(filters=112, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck11_shirnk_bn = BatchNormalization()
 
         self.bneck12_expand = Conv2D(filters=672, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck12_expand_bn = BatchNormalization()
         self.bneck12_expand_ac = h_swish()
         self.bneck12_dwise = DepthwiseConv2D(kernel_size=(3, 3), padding='same', strides=1,
                                              depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                             bias_initializer=tf.constant_initializer(0.))
+                                             use_bias=False)
         self.bneck12_dwise_bn = BatchNormalization()
         self.bneck12_dwise_ac = h_swish()
         self.bneck12_SE = SE(672)
         self.bneck12_shirnk = Conv2D(filters=112, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck12_shirnk_bn = BatchNormalization()
 
         self.bneck13_expand = Conv2D(filters=672, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck13_expand_bn = BatchNormalization()
         self.bneck13_expand_ac = h_swish()
         self.bneck13_dwise = DepthwiseConv2D(kernel_size=(5, 5), padding='same', strides=2,
                                              depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                             bias_initializer=tf.constant_initializer(0.))
+                                             use_bias=False)
         self.bneck13_dwise_bn = BatchNormalization()
         self.bneck13_dwise_ac = h_swish()
         self.bneck13_SE = SE(672)
         self.bneck13_shirnk = Conv2D(filters=160, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck13_shirnk_bn = BatchNormalization()
 
         self.bneck14_expand = Conv2D(filters=960, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck14_expand_bn = BatchNormalization()
         self.bneck14_expand_ac = h_swish()
         self.bneck14_dwise = DepthwiseConv2D(kernel_size=(5, 5), padding='same', strides=1,
                                              depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                             bias_initializer=tf.constant_initializer(0.))
+                                             use_bias=False)
         self.bneck14_dwise_bn = BatchNormalization()
         self.bneck14_dwise_ac = h_swish()
         self.bneck14_SE = SE(960)
         self.bneck14_shirnk = Conv2D(filters=160, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck14_shirnk_bn = BatchNormalization()
 
         self.bneck15_expand = Conv2D(filters=960, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck15_expand_bn = BatchNormalization()
         self.bneck15_expand_ac = h_swish()
         self.bneck15_dwise = DepthwiseConv2D(kernel_size=(5, 5), padding='same', strides=1,
                                              depthwise_initializer=tf.random_normal_initializer(stddev=0.01),
-                                             bias_initializer=tf.constant_initializer(0.))
+                                             use_bias=False)
         self.bneck15_dwise_bn = BatchNormalization()
         self.bneck15_dwise_ac = h_swish()
         self.bneck15_SE = SE(960)
         self.bneck15_shirnk = Conv2D(filters=160, kernel_size=(1, 1), padding='same', strides=1,
                                      kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                                     bias_initializer=tf.constant_initializer(0.))
+                                     use_bias=False)
         self.bneck15_shirnk_bn = BatchNormalization()
 
         self.c2 = Conv2D(filters=1024, kernel_size=(1, 1), padding='same',
                          kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-                         bias_initializer=tf.constant_initializer(0.))
+                         use_bias=False)
         self.bn2 = BatchNormalization()
         self.ac2 = h_swish()
 
@@ -792,17 +792,6 @@ class Mobilenetv3(Model):
         output = self.bneck6_dwise_bn(output)
         output = self.bneck6_dwise_ac(output)
         output = self.bneck6_SE(output)
-        output = self.bneck6_shirnk(output)
-        output = self.bneck6_shirnk_bn(output)
-        output = tf.add(output, shortcut6)
-
-        shortcut6 = output
-        output = self.bneck6_expand(output)
-        output = self.bneck6_expand_bn(output)
-        output = self.bneck6_expand_ac(output)
-        output = self.bneck6_dwise(output)
-        output = self.bneck6_dwise_bn(output)
-        output = self.bneck6_dwise_ac(output)
         output = self.bneck6_shirnk(output)
         output = self.bneck6_shirnk_bn(output)
         output = tf.add(output, shortcut6)
@@ -919,7 +908,7 @@ class yolov3(Model):
         self.opt = opt
         self.image_size = self.opt.img_size
         self.num_class = len(utils.read_class_names(self.opt.data))
-        if opt.model == 'darknet':
+        if opt.model == "darknet":
             self.backbone = Darknet(self.image_size)
         else:
             self.backbone = Mobilenetv3(self.image_size)
@@ -954,13 +943,12 @@ class yolov3(Model):
         self.ac_down1 = LeakyReLU(alpha=0.1)
 
         # Convolution Set2
-        if opt.model == 'darknet':
+        if opt.model == "darknet":
             self.c2_1 = Conv2D(input_shape=(26, 26, 768), filters=256, kernel_size=(1, 1), padding='same',
                                use_bias=False)
         else:
             self.c2_1 = Conv2D(input_shape=(26, 26, 368), filters=256, kernel_size=(1, 1), padding='same',
                                use_bias=False)
-        self.c2_1 = Conv2D(input_shape=(26, 26, 768), filters=256, kernel_size=(1, 1), padding='same', use_bias=False)
         self.bn2_1 = BatchNormalization()
         self.ac2_1 = LeakyReLU(alpha=0.1)
         self.c2_2 = Conv2D(filters=512, kernel_size=(3, 3), padding='same', use_bias=False)
@@ -988,14 +976,12 @@ class yolov3(Model):
         self.bn_down2 = BatchNormalization()
         self.ac_down2 = LeakyReLU(alpha=0.1)
         # Convolution Set3
-        if opt.model == 'darknet':
+        if opt.model == "darknet":
             self.c3_1 = Conv2D(input_shape=(52, 52, 348), filters=128, kernel_size=(1, 1), padding='same',
                                use_bias=False)
-
         else:
             self.c3_1 = Conv2D(input_shape=(52, 52, 168), filters=128, kernel_size=(1, 1), padding='same',
                                use_bias=False)
-
         self.bn3_1 = BatchNormalization()
         self.ac3_1 = LeakyReLU(alpha=0.1)
         self.c3_2 = Conv2D(filters=256, kernel_size=(3, 3), padding='same', use_bias=False)
@@ -1246,7 +1232,6 @@ def compute_loss(opt, pred, conv, label, bboxes, i=0):
 
     return giou_loss, conf_loss, prob_loss
 
-
 # parser = argparse.ArgumentParser()
 # parser.add_argument('--epochs', type=int, default=100)
 # parser.add_argument('--batch_size', type=int, default=8)
@@ -1256,11 +1241,19 @@ def compute_loss(opt, pred, conv, label, bboxes, i=0):
 # parser.add_argument('--lr_init', type=int, default=1e-4, help='initial lr')
 # parser.add_argument('--iou_loss_thresh', type=int, default=0.5, help='iou_loss_thresh')
 # parser.add_argument('--conti', type=bool, default=False, help='continue training')
-# parser.add_argument('--model', type=str, default='darknet', help='initial weights')
+# parser.add_argument('--model', type=str, default='mobilenet', help='initial weights')
 # opt = parser.parse_args()
 # print(opt)
 #
-# input = np.ones((1, 416, 416, 3), np.float64)
-# model = Mobilenetv3()
-# output = model(input)
-# model.summary()
+# input = np.ones((1, 416, 416, 3), np.float32)
+# model1 = yolov3(opt)
+# output = model1(input)
+# model1.summary()
+#
+# model2 = Mobilenetv3()
+# output = model2(input)
+# model2.summary()
+#
+# model3 = Darknet()
+# output = model3(input)
+# model3.summary()

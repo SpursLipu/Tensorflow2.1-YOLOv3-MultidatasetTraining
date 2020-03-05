@@ -34,14 +34,14 @@ def train_step(image_data, target):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--epochs', type=int, default=100)
-    parser.add_argument('--batch_size', type=int, default=8)
-    parser.add_argument('--data', type=str, default='cfg/visdrone.data', help='*.data file path')
-    parser.add_argument('--img_size', type=int, default=416, help='inference size (pixels)')
+    parser.add_argument('--batch_size', type=int, default=4)
+    parser.add_argument('--data', type=str, default='cfg/mask.data', help='*.data file path')
+    parser.add_argument('--img_size', type=int, default=608, help='inference size (pixels)')
     parser.add_argument('--weights', type=str, default='./weights/init/yolov3.weights', help='initial weights')
     parser.add_argument('--lr_init', type=int, default=1e-4, help='initial lr')
     parser.add_argument('--iou_loss_thresh', type=int, default=0.5, help='iou_loss_thresh')
     parser.add_argument('--conti', type=bool, default=False, help='continue training')
-    parser.add_argument('--model', type=str, default='mobilenet', help='initial weights')
+    parser.add_argument('--model', type=str, default='darknet', help='initial weights')
     opt = parser.parse_args()
     print(opt)
 
@@ -74,6 +74,6 @@ if __name__ == '__main__':
             global_steps += 1
         global_steps = 0
         if opt.model == 'darknet':
-            model.save_weights("./weights/darket/yolov3")
+            model.save_weights("./weights/darknet/yolov3")
         else:
             model.save_weights("./weights/mobilenet/yolov3")

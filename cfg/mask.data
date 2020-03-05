@@ -1,0 +1,4 @@
+classes= 2
+train=data/mask/train.txt
+valid=data/mask/test.txt
+names=data/mask.names

@@ -9,16 +9,16 @@ import os
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', type=str, default='cfg/visdrone.data', help='*.data file path')
-    parser.add_argument('--img_size', type=int, default=416, help='inference size (pixels)')
-    parser.add_argument('--weights', type=str, default='./weights/mobilenet/yolov3', help='initial weights')
+    parser.add_argument('--data', type=str, default='cfg/mask.data', help='*.data file path')
+    parser.add_argument('--img_size', type=int, default=608, help='inference size (pixels)')
+    parser.add_argument('--weights', type=str, default='./weights/darknet/yolov3', help='initial weights')
 
     parser.add_argument('--input_path', type=str, default='./data/input/', help='input_path')
 
     parser.add_argument('--iou_loss_thresh', type=int, default=0.5, help='iou_loss_thresh')
     parser.add_argument('--confidence_thresh', type=int, default=0.5, help='confidence_thresh')
     parser.add_argument('--nms_thresh', type=int, default=0.45, help='nms_thresh')
-    parser.add_argument('--model', type=str, default='mobilenet', help='initial weights')
+    parser.add_argument('--model', type=str, default='darknet', help='initial weights')
 
     opt = parser.parse_args()
     print(opt)
