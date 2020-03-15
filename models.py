@@ -1232,28 +1232,28 @@ def compute_loss(opt, pred, conv, label, bboxes, i=0):
 
     return giou_loss, conf_loss, prob_loss
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--epochs', type=int, default=100)
-# parser.add_argument('--batch_size', type=int, default=8)
-# parser.add_argument('--data', type=str, default='cfg/visdrone.data', help='*.data file path')
-# parser.add_argument('--img_size', type=int, default=416, help='inference size (pixels)')
-# parser.add_argument('--weights', type=str, default='./weights/init/yolov3.weights', help='initial weights')
-# parser.add_argument('--lr_init', type=int, default=1e-4, help='initial lr')
-# parser.add_argument('--iou_loss_thresh', type=int, default=0.5, help='iou_loss_thresh')
-# parser.add_argument('--conti', type=bool, default=False, help='continue training')
-# parser.add_argument('--model', type=str, default='mobilenet', help='initial weights')
-# opt = parser.parse_args()
-# print(opt)
-#
-# input = np.ones((1, 416, 416, 3), np.float32)
-# model1 = yolov3(opt)
-# output = model1(input)
-# model1.summary()
-#
-# model2 = Mobilenetv3()
-# output = model2(input)
-# model2.summary()
-#
-# model3 = Darknet()
-# output = model3(input)
-# model3.summary()
+parser = argparse.ArgumentParser()
+parser.add_argument('--epochs', type=int, default=100)
+parser.add_argument('--batch_size', type=int, default=8)
+parser.add_argument('--data', type=str, default='cfg/visdrone.data', help='*.data file path')
+parser.add_argument('--img_size', type=int, default=416, help='inference size (pixels)')
+parser.add_argument('--weights', type=str, default='./weights/init/yolov3.weights', help='initial weights')
+parser.add_argument('--lr_init', type=int, default=1e-4, help='initial lr')
+parser.add_argument('--iou_loss_thresh', type=int, default=0.5, help='iou_loss_thresh')
+parser.add_argument('--conti', type=bool, default=False, help='continue training')
+parser.add_argument('--model', type=str, default='darknet', help='initial weights')
+opt = parser.parse_args()
+print(opt)
+
+input = np.ones((1, 416, 416, 3), np.float32)
+model1 = yolov3(opt)
+output = model1(input)
+model1.summary()
+
+model2 = Mobilenetv3()
+output = model2(input)
+model2.summary()
+
+model3 = Darknet()
+output = model3(input)
+model3.summary()
